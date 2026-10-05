@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKÄL | Datos de transferencia</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111;
+      color: #fff;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      color: #171717;
+      border-radius: 24px;
+      padding: 30px 24px 24px;
+      box-shadow: 0 15px 45px rgba(0,0,0,.35);
+    }
+    .logo {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #777;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 19px;
+      margin: 0 0 18px;
+    }
+    .row {
+      padding: 13px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .label {
+      display: block;
+      font-size: 11px;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 4px;
+    }
+    .value {
+      font-size: 16px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 15px;
+      margin-top: 22px;
+      background: #111;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .note {
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">SKÄL</div>
+    <div class="subtitle">CAFETERÍA · EMPORIO</div>
+
+    <h2>Datos de transferencia</h2>
+
+    <div class="row">
+      <span class="label">Titular</span>
+      <span class="value">PON AQUÍ EL NOMBRE</span>
+    </div>
+
+    <div class="row">
+      <span class="label">RUT</span>
+      <span class="value">PON AQUÍ EL RUT</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Banco</span>
+      <span class="value">PON AQUÍ EL BANCO</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Tipo de cuenta</span>
+      <span class="value">PON AQUÍ EL TIPO DE CUENTA</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Número de cuenta</span>
+      <span class="value">PON AQUÍ EL NÚMERO</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Correo</span>
+      <span class="value">PON AQUÍ EL CORREO</span>
+    </div>
+
+    <button onclick="copiarDatos()">Copiar datos de transferencia</button>
+
+    <div class="note">Gracias por preferir SKÄL</div>
+  </main>
+
+  <script>
+    function copiarDatos() {
+      const datos = `Titular: PON AQUÍ EL NOMBRE
+RUT: PON AQUÍ EL RUT
+Banco: PON AQUÍ EL BANCO
+Tipo de cuenta: PON AQUÍ EL TIPO DE CUENTA
+Número de cuenta: PON AQUÍ EL NÚMERO
+Correo: PON AQUÍ EL CORREO`;
+
+      navigator.clipboard.writeText(datos).then(() => {
+        const boton = document.querySelector("button");
+        const original = boton.textContent;
+        boton.textContent = "✓ Datos copiados";
+        setTimeout(() => boton.textContent = original, 1800);
+      });
+    }
+  </script>
+</body>
+</html>
