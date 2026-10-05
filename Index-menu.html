@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SKÄL CAFÉ</title>
+
+    <meta name="description" content="SKÄL CAFÉ – Cafetería y Emporio">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at top, #3a3a3a 0%, #171717 45%, #0b0b0b 100%);
+
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+            color: #222;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 32px 22px 24px;
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.45);
+
+            text-align: center;
+        }
+
+        /* LOGO */
+
+        .logo {
+            width: 105px;
+            height: 105px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-weight: 800;
+            font-size: 19px;
+            letter-spacing: 1px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+
+            font-size: 14px;
+            color: #777;
+
+            letter-spacing: 0.5px;
+        }
+
+        /* BOTONES */
+
+        .buttons {
+            margin-top: 30px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .button {
+            text-decoration: none;
+
+            width: 100%;
+
+            padding: 16px 18px;
+
+            border-radius: 15px;
+
+            background: #111;
+            color: white;
+
+            display: flex;
+            align-items: center;
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                background 0.15s ease;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.22);
+
+            background: #222;
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            background: rgba(255,255,255,0.12);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+
+            margin-right: 13px;
+        }
+
+        .button-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .button-title {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .button-description {
+            font-size: 11px;
+            color: #bdbdbd;
+
+            margin-top: 2px;
+        }
+
+        .arrow {
+            font-size: 20px;
+            opacity: 0.6;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 27px;
+
+            font-size: 11px;
+            color: #999;
+
+            line-height: 1.5;
+        }
+
+        .nfc {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            margin-top: 7px;
+
+            color: #777;
+        }
+
+        /* MODAL TRANSFERENCIA */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.65);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+
+            width: 100%;
+            max-width: 400px;
+
+            border-radius: 24px;
+
+            padding: 28px 22px;
+
+            text-align: center;
+
+            animation: aparecer 0.2s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .modal-text {
+            margin-top: 10px;
+
+            font-size: 14px;
+            color: #777;
+
+            line-height: 1.5;
+        }
+
+        .close {
+            margin-top: 22px;
+
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 13px;
+
+            background: #111;
+            color: white;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        /* CARTA */
+
+        .coming-soon {
+            display: none;
+        }
+
+        .coming-soon.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <!-- LOGO -->
+        <div class="logo">
+            SKÄL
+        </div>
+
+        <div class="title">
+            SKÄL CAFÉ
+        </div>
+
+        <div class="subtitle">
+            Cafetería · Emporio
+        </div>
+
+
+        <!-- BOTONES -->
+
+        <div class="buttons">
+
+            <!-- RESEÑA -->
+            <a
+                class="button"
+                href="https://maps.app.goo.gl/bdUQbKFM4tFN8VuF9"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div class="icon">⭐</div>
+
+                <div class="button-text">
+                    <div class="button-title">
+                        Dejar una reseña
+                    </div>
+
+                    <div class="button-description">
+                        Cuéntanos cómo fue tu experiencia
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+            </a>
+
+
+            <!-- TRANSFERENCIA -->
+            <button
+                class="button"
+                onclick="abrirTransferencia()"
+                style="border:none; cursor:pointer;"
+            >
+                <div class="icon">💳</div>
+
+                <div class="button-text">
+                    <div class="button-title">
+                        Datos de transferencia
+                    </div>
+
+                    <div class="button-description">
+                        Información para realizar tu pago
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+            </button>
+
+
+            <!-- CARTA -->
+            <button
+                class="button"
+                onclick="abrirCarta()"
+                style="border:none; cursor:pointer;"
+            >
+                <div class="icon">📖</div>
+
+                <div class="button-text">
+                    <div class="button-title">
+                        Ver nuestra carta
+                    </div>
+
+                    <div class="button-description">
+                        Descubre nuestros productos
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+            </button>
+
+
+            <!-- INSTAGRAM -->
+            <a
+                class="button"
+                href="https://www.instagram.com/skalcafe/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div class="icon">📸</div>
+
+                <div class="button-text">
+                    <div class="button-title">
+                        Instagram
+                    </div>
+
+                    <div class="button-description">
+                        Síguenos en @skalcafe
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+
+            SKÄL CAFÉ · Cafetería y Emporio
+
+            <div class="nfc">
+                📱 Acerca tu teléfono para acceder
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL TRANSFERENCIA -->
+
+<div
+    id="transferModal"
+    class="modal"
+    onclick="cerrarFuera(event)"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-icon">
+            💳
+        </div>
+
+        <div class="modal-title">
+            Datos de transferencia
+        </div>
+
+        <div class="modal-text">
+
+            Los datos de transferencia
+            estarán disponibles aquí próximamente.
+
+            <br><br>
+
+            Puedes solicitar los datos
+            directamente en SKÄL CAFÉ.
+
+        </div>
+
+        <button
+            class="close"
+            onclick="cerrarTransferencia()"
+        >
+            Cerrar
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL CARTA -->
+
+<div
+    id="cartaModal"
+    class="modal"
+    onclick="cerrarFueraCarta(event)"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-icon">
+            📖
+        </div>
+
+        <div class="modal-title">
+            Nuestra carta
+        </div>
+
+        <div class="modal-text">
+
+            Estamos preparando nuestra carta digital.
+
+            <br><br>
+
+            ¡Próximamente podrás verla aquí!
+
+        </div>
+
+        <button
+            class="close"
+            onclick="cerrarCarta()"
+        >
+            Cerrar
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function abrirTransferencia() {
+
+        document
+            .getElementById("transferModal")
+            .classList
+            .add("active");
+
+    }
+
+
+    function cerrarTransferencia() {
+
+        document
+            .getElementById("transferModal")
+            .classList
+            .remove("active");
+
+    }
+
+
+    function abrirCarta() {
+
+        document
+            .getElementById("cartaModal")
+            .classList
+            .add("active");
+
+    }
+
+
+    function cerrarCarta() {
+
+        document
+            .getElementById("cartaModal")
+            .classList
+            .remove("active");
+
+    }
+
+
+    function cerrarFuera(event) {
+
+        if (event.target.id === "transferModal") {
+
+            cerrarTransferencia();
+
+        }
+
+    }
+
+
+    function cerrarFueraCarta(event) {
+
+        if (event.target.id === "cartaModal") {
+
+            cerrarCarta();
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
